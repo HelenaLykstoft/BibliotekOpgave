@@ -1,0 +1,89 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema biblo
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema biblo
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `biblo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `biblo` ;
+
+-- -----------------------------------------------------
+-- Table `biblo`.`City`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `biblo`.`City` (
+  `CityID` INT NOT NULL AUTO_INCREMENT,
+  `PostalCode` INT NOT NULL,
+  `City` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`CityID`),
+  UNIQUE INDEX `PostalCode_UNIQUE` (`PostalCode` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `biblo`.`Customers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `biblo`.`Customers` (
+  `CustomerID` INT NOT NULL AUTO_INCREMENT,
+  `CustomerName` VARCHAR(45) NOT NULL,
+  `PostalCode` INT NOT NULL,
+  `Address` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`CustomerID`),
+  INDEX `fk_Customers_City1_idx` (`PostalCode` ASC) VISIBLE,
+  CONSTRAINT `fk_Customers_City1`
+    FOREIGN KEY (`PostalCode`)
+    REFERENCES `biblo`.`City` (`PostalCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `biblo`.`Books`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `biblo`.`Books` (
+  `BookID` INT NOT NULL AUTO_INCREMENT,
+  `Title` VARCHAR(45) NOT NULL,
+  `Author` VARCHAR(45) NOT NULL,
+  `ReleaseYear` INT NOT NULL,
+  `Version` INT NOT NULL,
+  PRIMARY KEY (`BookID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `biblo`.`Bookrental`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `biblo`.`Bookrental` (
+  `BookrentalID` INT NOT NULL AUTO_INCREMENT,
+  `CustomerID` INT NOT NULL,
+  `BookID` INT NOT NULL,
+  `Date` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`BookrentalID`),
+  INDEX `fk_Bookrental_Customers_idx` (`CustomerID` ASC) VISIBLE,
+  INDEX `fk_Bookrental_Books1_idx` (`BookID` ASC) VISIBLE,
+  CONSTRAINT `fk_Bookrental_Customers`
+    FOREIGN KEY (`CustomerID`)
+    REFERENCES `biblo`.`Customers` (`CustomerID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Bookrental_Books1`
+    FOREIGN KEY (`BookID`)
+    REFERENCES `biblo`.`Books` (`BookID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
