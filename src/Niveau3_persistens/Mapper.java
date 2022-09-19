@@ -7,28 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mapper {
-    static void updaterNavne() {
-        udskrivNavne();
-        String sql = "update  navne set Navne = ? where idNavne = ?";
 
+    DatabaseConnection DBConn = new DatabaseConnection();
+    protected void updateCustomer() {
+        showCustomers();
+        String sql = "update  Customers set CustomerName = ? where CustomerID = ?";
 
-        try (Connection con = ConnectionConfig.getConnection();
+        try (Connection con = DBConn.createConnection();
              PreparedStatement ps = con.prepareStatement(sql);) {
-            String kundeNavn = TerminalInput.getString("angiv nyt navn");
-            ps.setString(1, kundeNavn);
+            String customerName = TerminalInput.getString("Update customer: ");
+            ps.setString(1, customerName);
+            ps.setInt(2, TerminalInput.getInt("Write the ID: "));
 
-
-            // det er det her jeg søger på.
-            ps.setInt(2, TerminalInput.getInt("skriv et tal"));
-
-
-            int res = ps.executeUpdate();    //https://javaconceptoftheday.com/difference-between-executequery-executeupdate-execute-in-jdbc/
+            int res = ps.executeUpdate();
 
             if (res > 0) {
 
-                System.out.println("Kunden med navnet " + "\"" + kundeNavn + "\"" + " er nu blevet opdateret");
+                System.out.println("The customer with the name " + "\"" + customerName + "\"" + " has now been updated.");
             } else {
-                System.out.println("en kunde med nummeret fandtes ikke i listen");
+                System.out.println("A customer with this number doesnt exist.");
 
             }
 
@@ -36,14 +33,14 @@ public class Mapper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        udskrivNavne();
+        showCustomers();
     }
 
-    static void slet() {
-        udskrivNavne();
+    /*protected void deleteCustomer() {
+        showCustomers();
         String sql = "delete from navne where Navne = ?";
 
-        try (Connection con = ConnectionConfig.getConnection();
+        try (Connection con = DBConn.createConnection();
              PreparedStatement ps = con.prepareStatement(sql);) {
             String kundeNavn = TerminalInput.getString("skriv navnet på den kunde der skal slettes ");
             ps.setString(1, kundeNavn);
@@ -63,57 +60,46 @@ public class Mapper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        udskrivNavne();
-    }
+        showCustomers();
+    }*/
 
-    static void udskrivNavne() {
-        List<String> kundeList = new ArrayList<>();
+    protected void showCustomers() {
+        List<String> customerList = new ArrayList<>();
 
-        String sql = "select * from Navne ";
+        String sql = "select * from Customers ";
 
-        try (Connection con = ConnectionConfig.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {           // https://en.wikipedia.org/wiki/Prepared_statement
-
-
-            ResultSet resultSet = ps.executeQuery();   //https://javaconceptoftheday.com/difference-between-executequery-executeupdate-execute-in-jdbc/
+        try (Connection con = DBConn.createConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("idNavne");
-                String navn = resultSet.getString("Navne");
-                kundeList.add(id + " : " + navn);
+                int id = resultSet.getInt("CustomerID");
+                String customerName = resultSet.getString("CustomerName");
+                customerList.add(id + " : " + customerName);
             }
         } catch (SQLException e) {
 
             e.printStackTrace();
         }
 
-        for (String s : kundeList) {
+        for (String s : customerList) {
             System.out.println(s);
         }
     }
 
-    static void insert() {
-        String sql = "INSERT INTO navne (navne) VALUES (?)";
+    protected void createCustomer() {
+        String sql = "INSERT INTO Customers (CustomerName) VALUES (?)";
 
-
-        // se lige try-with-resources f.eks. her  https://www.baeldung.com/java-try-with-resources
-        try (Connection con = ConnectionConfig.getConnection();  // får en connection
-
-             // se evt. https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html
+        try (Connection con = DBConn.createConnection();
              PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
         ) {
+            ps.setString(1, TerminalInput.getString("Write a name: "));
+            ps.executeUpdate();
 
-            // her klargøres mit prepared statement ved at min parametre indsættes.
-            ps.setString(1, TerminalInput.getString("Skriv et navn"));
-
-
-            ps.executeUpdate();    //https://javaconceptoftheday.com/difference-between-executequery-executeupdate-execute-in-jdbc/
-
-
-            ResultSet ids = ps.getGeneratedKeys();
-            ids.next();
-            int id = ids.getInt(1);
-            System.out.println("vi er noget til række: " + id);
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            int id = rs.getInt(1);
+            System.out.println("We now have " + id +" amount of customers.");
 
         } catch (Exception e) {
             e.printStackTrace();

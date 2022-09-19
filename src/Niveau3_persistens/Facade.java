@@ -1,23 +1,18 @@
 package Niveau3_persistens;
 
 public class Facade {
-  static Minliste minliste = new Minliste();
-    public static void insert(){
-        //Mapper.insert();
-        minliste.insert();
+
+    Mapper mapper = new Mapper();
+    public void createCustomer(){
+        mapper.createCustomer();
     }
 
-    public static void slet(){
-        //Mapper.slet();
-        minliste.slet();
+    public void updateCustomer(){
+        mapper.updateCustomer();
     }
 
-    public static void udskrivNavne(){
-        //Mapper.udskrivNavne();
-        minliste.udskrivNavne();
+    public void showCustomers(){
+        mapper.showCustomers();
     }
 
-    public static void updaterNavne(){
-        Mapper.updaterNavne();
-    }
 }
