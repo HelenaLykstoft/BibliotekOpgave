@@ -11,8 +11,8 @@ public class Mapper {
     DatabaseConnection DBConn = new DatabaseConnection();
 
     public void listOfCustomers() {
-        String ListOfCustomers = "CUSTOMER LIST - ID / NAME";
-        System.out.println(ListOfCustomers);
+        //String ListOfCustomers = "CUSTOMER LIST - ID / NAME";
+        //System.out.println(ListOfCustomers);
         showCustomersOnID();
     }
 
@@ -30,7 +30,7 @@ public class Mapper {
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
             int id = rs.getInt(1);
-            System.out.println("We now have " + id + " amount of customers");
+            System.out.println("We now have " + id + " customers");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -151,15 +151,31 @@ public class Mapper {
             int customerID = Integer.parseInt(TerminalInput.getString("Choose a customer ID to delete"));
             ps.setInt(1, customerID);
 
-            int res = ps.executeUpdate();
+            int result = ps.executeUpdate();
 
-            if (res > 0) {
-                System.out.println(customerID + "with the name has now been deleted");
+            if (result > 0) {
+                System.out.println("A customer with the ID " + customerID + "has now been deleted");
             } else {
                 System.out.println("Something went wrong");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected void addBookData() {
+    }
+
+    protected void updateBookData() {
+    }
+
+    protected void deleteBookData() {
+    }
+
+    protected void showAllBooks() {
+    }
+
+    protected void closeConnection() {
+        DBConn.closeConnection();
     }
 }
