@@ -10,7 +10,7 @@ public class EnglishMenu implements LanguageController {
         int input;
         String s = "\nMain Menu - Library" +
                 "\nWhich menu do you want to go to?" +
-                "\n" + bullet + " 1 = Customers" +
+                "\n" + bullet + " 1 = Customers" +          //The english menu shown to the customer
                 "\n" + bullet + " 2 = Books" +
                 "\n" + bullet + " 3 = Book Rentals\n";
 

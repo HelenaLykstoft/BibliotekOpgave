@@ -56,7 +56,7 @@ public class DanishMenu implements LanguageController {
         int input;
         String s = "\nBog Menu: " +
                 "\n" + bullet + " 1 = Tilføj ny Bog" +
-                "\n" + bullet + " 2 = Opdater Bog Information" +
+                "\n" + bullet + " 2 = Opdater Bog Information" +     //The Danish menu shown to the customer
                 "\n" + bullet + " 3 = Slet en Bog" +
                 "\n" + bullet + " 4 = Vis alle bøger\n";
 

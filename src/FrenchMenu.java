@@ -31,7 +31,7 @@ public class FrenchMenu implements LanguageController {
         int input;
         String s = "\nMenu pour un client: " +
                 "\n" + bullet + " 1 = Ajouter un client" +
-                "\n" + bullet + " 2 = J'aime manger des saucisses au petit déjeuner" +
+                "\n" + bullet + " 2 = J'aime manger des saucisses au petit déjeuner" +      //The French menu shown to the customer
                 "\n" + bullet + " 3 = Éloigne-toi de ma vue" +
                 "\n" + bullet + " 4 = Je pense que les girafes devraient être considérées comme des oiseaux" +
                 "\n" + bullet + " 5 = Montrez-moi le contenu de votre peuple de gressins\n";

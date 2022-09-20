@@ -366,7 +366,13 @@ public class Mapper {
 
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
+
+                         /*TODO: Extra -- store the BookID or title somewhere
+                                 that so it can be displayed
+                                 to the customer what they have rented.
+                                 --> instead of displaying PLACEHOLDER*/
             System.out.println("has successfully rented book: PLACEHOLDER ");
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -382,7 +388,10 @@ public class Mapper {
     protected void showBooksRentedView(){
         List<String> rentedBooks = new ArrayList<>();
 
-        String sql = "select * from rentedbooksview";
+        String sql = "select * from rentedbooksview"; //displays the view created by making two inner joins
+
+            /*TODO: Maybe make an Try-catch/if statement that prevents a crash(and or) exception from occurring due to the view not being created.
+                       -->!!happens and HAS happened occasionally when changing the tables in the workbench!!<--*/
 
         try (Connection con = DBConn.createConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -396,10 +405,8 @@ public class Mapper {
                 String title = rs.getString("Title");
 
 
-
-               // rentedBooks.add("CUSTOMER-ID: " + customerID + ", CUSTOMER-NAME: " + customerName + ", BOOK-ID: " + BookID + ", BOOK-TITLE: " + Title+"\n");
-                rentedBooks.add("Rental Information: " +
-                        "\n" + bullet + " Customer id: " +customerID+
+                rentedBooks.add("Rental Information: " +                //Stole Felicias bullet points for a easy-on-the-eye
+                        "\n" + bullet + " Customer id: " +customerID+   // visual experience when printing the rental information
                         "\n" + bullet + " Customer Name: " +customerName+
                         "\n" + bullet + " Book id: " +bookID+
                         "\n" + bullet + " Book Title: "+title+"\n");
