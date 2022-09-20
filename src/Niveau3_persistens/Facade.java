@@ -26,7 +26,7 @@ public class Facade {
     }
 
     public void showAllCustomerData() {
-        mapper.showCustomersOnIDAndAddress();
+        mapper.showCustomerData();
     }
 
     public void deleteCustomer() {
@@ -38,7 +38,10 @@ public class Facade {
     }
 
     public void updateBooks() {
-        mapper.updateBookData();
+        mapper.updateBookName();
+        mapper.updateBookAuthor();
+        mapper.updateBookReleaseYear();
+        mapper.updateBookVersion();
     }
 
     public void deleteBook() {
@@ -48,6 +51,7 @@ public class Facade {
     public void showBooks() {
         mapper.showAllBooks();
     }
+
     public void closeConnectionDB() {
         mapper.closeConnection();
     }

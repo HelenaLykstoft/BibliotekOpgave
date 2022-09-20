@@ -1,5 +1,4 @@
 import Niveau2_logik.TerminalInput;
-import Niveau3_persistens.DatabaseConnection;
 import Niveau3_persistens.Facade;
 
 public class Main {
