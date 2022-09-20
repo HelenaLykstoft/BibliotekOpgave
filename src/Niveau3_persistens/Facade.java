@@ -45,6 +45,14 @@ public class Facade {
         mapper.showAllBooks();
     }
 
+    public void bookRental(){
+        mapper.bookRental();
+    }
+
+    public void showBooksRentedView(){
+        mapper.showBooksRentedView();
+    }
+
     public void closeConnectionDB() {
         mapper.closeConnection();
     }

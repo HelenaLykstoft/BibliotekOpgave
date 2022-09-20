@@ -78,11 +78,26 @@ public class Main {
     private static void bookRentalMenu() {
         int input;
         String s = "\nBook Rental Menu: " +
-                "\n" + bullet + " 1 = add " +
-                "\n" + bullet + " 2 = " +
-                "\n" + bullet + " 3 = " +
-                "\n" + bullet + " 4 = ";
+                "\n" + bullet + " 1 = Rent out a book" +
+                "\n" + bullet + " 2 = Show all rented books\n";
 
-        allMenus();
+//                + //TODO: EVT, LAV EN RETUNÉR BOOK/ DELETE BOOK
+//                "\n" + bullet + " 3 = return a book" +
+//                "\n" + bullet + " 4 = ";
+//
+        input = TerminalInput.getInt(s);
+        while(true){
+            switch (input){
+                case 1 -> facade.bookRental();
+                case 2 -> facade.showBooksRentedView();
+//                case 3 -> facade.returnBook();            //TODO: EVT EKSTRA ARBEJDE
+//                case 4 -> facade.deleteBookRental();
+                default -> System.out.println("Something went wrong.. Try again");
+
+
+            }
+            allMenus();
+        }
+
     }
 }

@@ -9,14 +9,16 @@ public class DatabasePassword {
 
     // CONSTRUCTOR
     protected DatabasePassword() {
+//        this.JdbcUrl = "jdbc:mysql://localhost:3306/TestDatabase?serverTimezone=CET&useSSL=false";
         this.JdbcUrl = "jdbc:mysql://localhost:3306/biblo?serverTimezone=CET&useSSL=false";
+
         this.username = "root";
 
+        this.password = "Solskin#12";
         // passwords to be used on local computers
 //        this.password = "lortekode";
         //this.password = "Lampen04aug";
         //this.password = "Mysql1238Code18";
-        this.password = "Solskin#12";
     }
 
     // Method to return the sql url connection

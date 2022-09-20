@@ -10,6 +10,8 @@ public class Mapper {
 
     DatabaseConnection DBConn = new DatabaseConnection();
 
+    private static String bullet = "\u2022";
+
     protected void closeConnection() {
         DBConn.closeConnection();
     }
@@ -347,7 +349,71 @@ public class Mapper {
     }
 
     //BOOK RENTAL TABLE METHODS
+    protected void bookRental (){
 
+
+        String sql = "INSERT INTO bookrental (customersID, booksID, Date) VALUES (?,?,?)";
+
+        try (Connection con = DBConn.createConnection();
+             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
+        ) {
+            showCustomersOnID();
+            ps.setString(1, TerminalInput.getString("customerID"));
+            showAllBooks();
+            ps.setString(2, TerminalInput.getString("booksID"));
+            ps.setString(3, TerminalInput.getString("Date"));
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            System.out.println("has successfully rented book: PLACEHOLDER ");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Something went wrong");
+
+        }
+
+
+
+
+    }
+
+    protected void showBooksRentedView(){
+        List<String> rentedBooks = new ArrayList<>();
+
+        String sql = "select * from rentedbooksview";
+
+        try (Connection con = DBConn.createConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int customerID = rs.getInt("customersID");
+                String customerName = rs.getString("CustomerName");
+                int bookID = rs.getInt("booksID");
+                String title = rs.getString("Title");
+
+
+
+               // rentedBooks.add("CUSTOMER-ID: " + customerID + ", CUSTOMER-NAME: " + customerName + ", BOOK-ID: " + BookID + ", BOOK-TITLE: " + Title+"\n");
+                rentedBooks.add("Rental Information: " +
+                        "\n" + bullet + " Customer id: " +customerID+
+                        "\n" + bullet + " Customer Name: " +customerName+
+                        "\n" + bullet + " Book id: " +bookID+
+                        "\n" + bullet + " Book Title: "+title+"\n");
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("CUSTOMER-ID / CUSTOMER-NAME / BOOK-ID / BOOK-TITLE:\n ");
+        for (String s : rentedBooks) {
+            System.out.println(s);
+        }
+
+    }
 
 
 }
