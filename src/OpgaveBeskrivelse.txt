@@ -10,7 +10,7 @@ For at gøre din lærer glad skal følgende ting helst opfyldes:
 
 TODO: --> I skal bruge git ✓✓
 
-TODO: --> Applikationen skal kunne skifte mellem tre forskellige sprog i på køretidspunktet.
+TODO: --> Applikationen skal kunne skifte mellem tre forskellige sprog i på køretidspunktet.✓✓
 
 TODO: --> I skal selvfølgelig også bruge getString og geInt ✓✓
 

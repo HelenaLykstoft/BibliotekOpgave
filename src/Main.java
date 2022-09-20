@@ -27,7 +27,7 @@ public class Main {
             switch (input) {
                 case 1 -> languageController = new EnglishMenu();
                 case 2 -> languageController = new FrenchMenu();
-//                case 3 -> LanguageMenu = new DanishMenu();
+                case 3 -> languageController = new DanishMenu();
                 default -> LanguageMenu("\n Error -- Please choose from the options available.");
             }
 
