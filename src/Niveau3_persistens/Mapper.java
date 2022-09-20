@@ -48,6 +48,17 @@ public class Mapper {
         }
     }
 
+    public void updateCustomer() {
+        System.out.println("Update Customer Name / Address");
+        String input = TerminalInput.getString("Insert 'Name' or 'Address'");
+
+        switch (input) {
+            case "Name" -> updateCustomerName();
+            case "Address" -> updateCustomerAddress();
+            default -> System.out.println("Something went wrong.. Try again");
+        }
+    }
+
     protected void updateCustomerName() {
         listOfCustomers();
         String sql = "update Customers set CustomerName = ? where CustomerID = ?";

@@ -11,14 +11,7 @@ public class Facade {
     }
 
     public void updateCustomer() {
-        System.out.println("Update Customer Name / Address");
-        String input = TerminalInput.getString("Insert 'Name' or 'Address'");
-
-        switch (input) {
-            case "Name" -> mapper.updateCustomerName();
-            case "Address" -> mapper.updateCustomerAddress();
-            default -> System.out.println("Something went wrong.. Try again");
-        }
+        mapper.updateCustomer();
     }
 
     public void showCustomerNames() {
