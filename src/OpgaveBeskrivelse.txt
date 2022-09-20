@@ -14,7 +14,7 @@ TODO: --> Applikationen skal kunne skifte mellem tre forskellige sprog i på kø
 
 TODO: --> I skal selvfølgelig også bruge getString og geInt ✓✓
 
-TODO: --> Lav nogen fornuftige views ✓
+TODO: --> Lav nogen fornuftige views
 
 TODO: --> Overvej om der er et ubegrænset antal eksemplarer af en given bog,
           eller om man f.eks. kan risikere at en bog er udlånt Hvem hvad,
