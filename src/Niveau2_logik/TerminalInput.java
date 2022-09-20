@@ -7,16 +7,14 @@ public class TerminalInput {
         System.out.println(s + " : ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
-
     }
 
     public static int getInt(String s){
         while (true) {
             try {
-                int ans = Integer.parseInt(getString(s));
-                return ans;
+                return Integer.parseInt(getString(s));
             } catch (NumberFormatException e) {
-                System.out.println("husk ikke et tal ord");
+                System.out.println("You need to enter a number, not words");
             }
         }
     }
