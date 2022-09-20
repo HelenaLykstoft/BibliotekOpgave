@@ -13,10 +13,10 @@ public class DatabasePassword {
         this.username = "root";
 
         // passwords to be used on local computers
-        this.password = "lortekode";
+//        this.password = "lortekode";
         //this.password = "Lampen04aug";
         //this.password = "Mysql1238Code18";
-        //this.password = "Solskin#12";
+        this.password = "Solskin#12";
     }
 
     // Method to return the sql url connection
