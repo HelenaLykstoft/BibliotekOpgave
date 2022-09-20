@@ -19,15 +19,15 @@ public class Main {
         System.out.println(ErrorMessage);
         String s = "\nAnnouncement - Welcome to the Public Library" +
                 "\nPlease choose a language! // Veuillez choisir une langue! // Kōwhirihia he reo! " +
-                "\n" + bullet + " 1 = English" +
-                "\n" + bullet + " 2 = Francais" +
-                "\n" + bullet + " 3 = Māori (Austronesian)\n";
+                "\n" + bullet + " 1 = English // Anglais // Engelsk" +
+                "\n" + bullet + " 2 = French // Francais // Fransk" +
+                "\n" + bullet + " 3 = Danish // Danoise // Dansk\n";
 
             input = TerminalInput.getInt(s);
             switch (input) {
                 case 1 -> languageController = new EnglishMenu();
                 case 2 -> languageController = new FrenchMenu();
-//                case 3 -> LanguageMenu = new MaoriMenu();
+//                case 3 -> LanguageMenu = new DanishMenu();
                 default -> LanguageMenu("\n Error -- Please choose from the options available.");
             }
 
