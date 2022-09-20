@@ -11,9 +11,9 @@ public class Mapper {
     DatabaseConnection DBConn = new DatabaseConnection();
 
     public void listOfCustomers() {
-        String ListOfCustomers = "List of Customers: ";
+        String ListOfCustomers = "CUSTOMER LIST - ID / NAME";
         System.out.println(ListOfCustomers);
-        showCustomers();
+        showCustomersOnID();
     }
 
     protected void addCustomer() {
@@ -38,7 +38,7 @@ public class Mapper {
         }
     }
 
-    protected void updateCustomer() {
+    protected void updateCustomerName() {
         listOfCustomers();
         String sql = "update Customers set CustomerName = ? where CustomerID = ?";
 
@@ -55,7 +55,7 @@ public class Mapper {
             if (res > 0) {
                 System.out.println("The customer with the ID "
                         + customerID + " has now been updated to "
-                        + "\"" + customerName + "\"");
+                        + "'" + customerName + "'");
             } else {
                 System.out.println("A customer with this ID does not exist.");
             }
@@ -65,7 +65,33 @@ public class Mapper {
         listOfCustomers();
     }
 
-    protected void showCustomers() {
+    protected void updateCustomerAddress() {
+        showCustomersOnIDAndAddress();
+        String sql = "update Customers set Address = ? where CustomerID = ?";
+
+        try (Connection con = DBConn.createConnection();
+             PreparedStatement ps = con.prepareStatement(sql);) {
+
+            int customerID = TerminalInput.getInt("\nUpdate customer ID");
+            String address = TerminalInput.getString("Type the new address");
+
+            ps.setInt(2, customerID);
+            ps.setString(1, address);
+            int res = ps.executeUpdate();
+
+            if (res > 0) {
+                System.out.println("The customer with the ID "
+                        + customerID + "'s address has now been updated to "
+                        + "'" + address + "'");
+            } else {
+                System.out.println("A customer with this ID does not exist.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void showCustomersOnID() {
         List<String> customerList = new ArrayList<>();
 
         String sql = "select * from Customers";
@@ -78,20 +104,45 @@ public class Mapper {
             while (rs.next()) {
                 int id = rs.getInt("CustomerID");
                 String customerName = rs.getString("CustomerName");
-                customerList.add("ID: " + id + " : " + customerName);
+                customerList.add("ID " + id + " : " + customerName);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String ListOfCustomers = "List of Customers: ";
-        System.out.println(ListOfCustomers);
+        System.out.println("CUSTOMER LIST - ID / NAME");
         for (String s : customerList) {
             System.out.println(s);
         }
     }
 
+    protected void showCustomersOnIDAndAddress() {
+        List<String> customerAddressList = new ArrayList<>();
+
+        String sql = "select * from Customers";
+
+        try (Connection con = DBConn.createConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("CustomerID");
+                String customerName = rs.getString("CustomerName");
+                int postalCode = rs.getInt("PostalCode");
+                String address = rs.getString("Address");
+                customerAddressList.add("ID " + id + " : " + customerName + ", " + postalCode + ", " + address);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("CUSTOMER DATA - ID / NAME / POSTAL CODE / ADDRESS");
+        for (String s : customerAddressList) {
+            System.out.println(s);
+        }
+    }
+
     protected void deleteCustomer() {
-        showCustomers();
+        showCustomersOnID();
         String sql = "delete from Customers where CustomerID = ?";
 
         try (Connection con = DBConn.createConnection();
