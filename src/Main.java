@@ -71,10 +71,18 @@ public class Main {
                 case 4 -> facade.showBooks();
                 default -> System.out.println("Something went wrong.. Try again");
             }
+            allMenus();
         }
     }
 
     private static void bookRentalMenu() {
-        System.out.println("Put something here");
+        int input;
+        String s = "\nBook Rental Menu: " +
+                "\n" + bullet + " 1 = add " +
+                "\n" + bullet + " 2 = " +
+                "\n" + bullet + " 3 = " +
+                "\n" + bullet + " 4 = ";
+
+        allMenus();
     }
 }

@@ -204,7 +204,7 @@ public class Mapper {
         try (Connection con = DBConn.createConnection();
              PreparedStatement ps = con.prepareStatement(sql);) {
 
-            int bookID = TerminalInput.getInt("Update book title");
+            int bookID = TerminalInput.getInt("Update book ID");
             String title = TerminalInput.getString("Type the new title");
 
             ps.setInt(2, bookID);
@@ -213,7 +213,7 @@ public class Mapper {
 
             if (result > 0) {
                 System.out.println("The book with the ID "
-                        + bookID + "'s title has now been updated to "
+                        + bookID + "'s title has now been updated to"
                         + "'" + title + "'");
             } else {
                 System.out.println("A book with this ID does not exist.");
@@ -231,7 +231,7 @@ public class Mapper {
         try (Connection con = DBConn.createConnection();
              PreparedStatement ps = con.prepareStatement(sql);) {
 
-            int bookID = TerminalInput.getInt("Update author of the book");
+            int bookID = TerminalInput.getInt("Update book ID");
             String author = TerminalInput.getString("Type the new author");
 
             ps.setInt(2, bookID);
@@ -258,7 +258,7 @@ public class Mapper {
         try (Connection con = DBConn.createConnection();
              PreparedStatement ps = con.prepareStatement(sql);) {
 
-            int bookID = TerminalInput.getInt("Update release year of the book");
+            int bookID = TerminalInput.getInt("Update book ID");
             int releaseYear = TerminalInput.getInt("Type the new release year");
 
             ps.setInt(2, bookID);
@@ -285,7 +285,7 @@ public class Mapper {
         try (Connection con = DBConn.createConnection();
              PreparedStatement ps = con.prepareStatement(sql);) {
 
-            int bookID = TerminalInput.getInt("Update version of the book");
+            int bookID = TerminalInput.getInt("Update book ID");
             int version = TerminalInput.getInt("Type the new version number");
 
             ps.setInt(2, bookID);
@@ -322,7 +322,7 @@ public class Mapper {
                 int id = rs.getInt("BookID");
                 String title = rs.getString("Title");
                 String author = rs.getString("Author");
-                int release_year = rs.getInt("Release Year");
+                int release_year = rs.getInt("ReleaseYear");
                 int version = rs.getInt("Version");
                 bookList.add("ID " + id + " : " + title + ", " + author + ", " + release_year + ", " + version);
             }
@@ -336,5 +336,7 @@ public class Mapper {
     }
 
     //BOOK RENTAL TABLE METHODS
+
+
 
 }
